@@ -9,6 +9,26 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+stages:
+- stage: ShowDirStage
+  jobs:
+  - job: ShowArtifactDir
+    steps:       
+    - script: echo $(Build.ArtifactStagingDirectory)  
+    #- script: echo $(Build.SourcesDirectory) 
+  - job: ShowSourceDir
+    steps:       
+    #- script: echo $(Build.ArtifactStagingDirectory)  
+    - script: echo $(Build.SourcesDirectory) 
+  - job: ShowBinariesDir
+    steps:     
+    - script: echo $(Build.BinariesDirectory) 
+    #- script: echo $(Common.TestResultsDirectory) 
+  - job: ShowTestResultsDir
+    steps:     
+    #- script: echo $(Build.BinariesDirectory) 
+    - script: echo $(Common.TestResultsDirectory) 
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
