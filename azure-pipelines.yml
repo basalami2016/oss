@@ -11,29 +11,32 @@ pool:
 
 stages:
 - stage: ShowDirStage
+  displayName: 'Show Dir Stage'
   jobs:
-  - job: ShowArtifactDir
+  - job: ShowArtifactDirJob
+    displayName: 'ShowArtifDirJob'
     steps:       
-    - script: echo $(Build.ArtifactStagingDirectory)  
-    #- script: echo $(Build.SourcesDirectory) 
+    - script: |
+       echo $(Build.ArtifactStagingDirectory) 
+       #echo $(Build.ArtifactStagingDirectory) 
+      displayName: 'Run ShowDirJob Script'     
   - job: ShowSourceDir
-    steps:       
-    #- script: echo $(Build.ArtifactStagingDirectory)  
-    - script: echo $(Build.SourcesDirectory) 
+    steps:      
+    - script: |
+        echo $(Build.SourcesDirectory) 
+        #echo $(Build.SourcesDirectory)
   - job: ShowBinariesDir
     steps:     
-    - script: echo $(Build.BinariesDirectory) 
-    #- script: echo $(Common.TestResultsDirectory) 
+    - script: |
+        echo $(Build.BinariesDirectory) 
+        #echo $(Build.BinariesDirectory)    
   - job: ShowTestResultsDir
-    steps:     
-    #- script: echo $(Build.BinariesDirectory) 
-    - script: echo $(Common.TestResultsDirectory) 
+    steps:    
+    - script: |
+        echo $(Common.TestResultsDirectory) 
+        #echo $(Common.TestResultsDirectory) 
+      displayName: 'Run a multi-line script'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+   
+  
