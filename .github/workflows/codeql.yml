@@ -52,10 +52,10 @@ jobs:
       with:
         distribution: 'corretto'
         java-version: 17
-        cache: 'maven'
+        #cache: 'maven'
         #cache-dependency-path: 'sub-project/pom.xml' # optional
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    #- name: Build with Maven
+      #run: mvn -B package --file pom.xml
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
