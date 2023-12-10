@@ -37,6 +37,21 @@ stages:
         #echo $(Common.TestResultsDirectory) 
       displayName: 'Run a multi-line script'
 
-
+- stage: MavenStage
+  displayName: 'MavenStage'
+  jobs:
+  - job: 'MavenJob'
+    displayName: 'MavenJob'
+    steps:     
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
    
   
