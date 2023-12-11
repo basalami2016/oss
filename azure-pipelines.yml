@@ -13,7 +13,12 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default
+  demands:
+   - agent.name -equals NiQFlexAgent001 
+
+#pool:
+  #vmImage: ubuntu-latest
 
 stages:
 - stage: ShowDirStage
