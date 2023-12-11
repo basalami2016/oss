@@ -35,6 +35,7 @@ stages:
   - job: DoCopyFileJob
     steps:   
     - task: CopyFiles@2
+      displayName: 'Do Copy File'
       inputs:
         Contents: $(synopsysFile) 
         TargetFolder: ${AGENT_TOOLSDIRECTORY} 
@@ -42,5 +43,8 @@ stages:
         OverWrite: true
         flattenFolders: true
         preserveTimestamp: true
+    - script: |
+       cd ${AGENT_TOOLSDIRECTORY}
+       ls
 
   
