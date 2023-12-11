@@ -5,8 +5,8 @@
 
 # Set variables once
 variables:
-  synopsysFile: 'C:\Users\niqfl\Downloads\devsecops\synopsys-detect-9.1.0.jar'
-  #synopsysFile: 'synopsys-detect-9.1.0.jar'
+  synopsysDir: 'C:\Users\niqfl\Downloads\devsecops'
+  synopsysFile: 'synopsys-detect-9.1.0.jar'
 
 trigger:
 - master
@@ -37,14 +37,12 @@ stages:
     - task: CopyFiles@2
       displayName: 'Do Copy File'
       inputs:
+        SourceFolder: $(synopsysDir)
         Contents: $(synopsysFile) 
-        TargetFolder: ${AGENT_TOOLSDIRECTORY} 
-        CleanTargetFolder: true
-        OverWrite: true
-        flattenFolders: true
-        preserveTimestamp: true
+        TargetFolder: ${AGENT_TOOLSDIRECTORY}         
     - script: |
        cd ${AGENT_TOOLSDIRECTORY}
        ls
+  - 
 
   
