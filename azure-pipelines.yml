@@ -5,6 +5,7 @@
 
 # Set variables once
 variables:
+  synopsys: 'C:\Users\niqfl\Downloads\devsecops\synopsys-detect-9.1.0.jar'
   synopsysDir: 'C:\Users\niqfl\Downloads\devsecops'
   synopsysFile: 'synopsys-detect-9.1.0.jar'
 
@@ -25,7 +26,8 @@ stages:
        echo $(Build.ArtifactStagingDirectory) 
        echo $(Build.SourcesDirectory) 
        echo $(Build.BinariesDirectory) 
-       echo $(Common.TestResultsDirectory)        
+       echo $(Common.TestResultsDirectory)   
+       echo $(Build.Repository.LocalPath)     
       displayName: 'Show Dirs'     
   - job: ShowSourceDir
     steps:      
@@ -37,8 +39,8 @@ stages:
     - task: CopyFiles@2
       displayName: 'Do Copy File'
       inputs:
-        SourceFolder: $(synopsysDir)
-        Contents: $(synopsysFile) 
+        #SourceFolder: $(synopsysDir)
+        Contents: $(synopsys) 
         TargetFolder: ${AGENT_TOOLSDIRECTORY}         
     - script: |
        cd ${AGENT_TOOLSDIRECTORY}
