@@ -43,6 +43,6 @@ stages:
     - script: |
        cd ${AGENT_TOOLSDIRECTORY}
        ls
-  - 
+  
 
   
