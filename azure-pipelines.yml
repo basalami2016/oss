@@ -3,6 +3,11 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# Set variables once
+variables:
+  synopsysFile: 'C:\Users\niqfl\Downloads\devsecops\synopsys-detect-9.1.0.jar'
+  #synopsysFile: 'synopsys-detect-9.1.0.jar'
+
 trigger:
 - master
 
@@ -13,29 +18,29 @@ stages:
 - stage: ShowDirStage
   displayName: 'Show Dir Stage'
   jobs:
-  - job: ShowArtifactDirJob
-    displayName: 'ShowArtifDirJob'
+  - job: ShowDirJob
+    displayName: 'ShowDirJob'
     steps:       
     - script: |
        echo $(Build.ArtifactStagingDirectory) 
-       #echo $(Build.ArtifactStagingDirectory) 
-      displayName: 'Run ShowDirJob Script'     
+       echo $(Build.SourcesDirectory) 
+       echo $(Build.BinariesDirectory) 
+       echo $(Common.TestResultsDirectory)        
+      displayName: 'Show Dirs'     
   - job: ShowSourceDir
     steps:      
     - script: |
         echo $(Build.SourcesDirectory) 
         #echo $(Build.SourcesDirectory)
-  - job: ShowBinariesDir
-    steps:     
-    - script: |
-        echo $(Build.BinariesDirectory) 
-        #echo $(Build.BinariesDirectory)    
-  - job: ShowTestResultsDir
-    steps:    
-    - script: |
-        echo $(Common.TestResultsDirectory) 
-        #echo $(Common.TestResultsDirectory) 
-      displayName: 'Run a multi-line script'
-
+  - job: DoCopyFileJob
+    steps:   
+    - task: CopyFiles@2
+      inputs:
+        Contents: $(synopsysFile) 
+        TargetFolder: ${AGENT_TOOLSDIRECTORY} 
+        CleanTargetFolder: true
+        OverWrite: true
+        flattenFolders: true
+        preserveTimestamp: true
 
   
