@@ -35,7 +35,14 @@ stages:
         echo $(Build.SourcesDirectory) 
         #echo $(Build.SourcesDirectory)
   - job: DoCopyFileJob
-    steps:   
+    steps:
+    - task: SynopsysDetectTask@9
+      inputs:
+        BlackDuckProxyService: ''
+        BlackDuckService: ''
+        DetectArguments: 's'
+        DetectVersion: 'latest'
+        DetectFolder: 's'   
     - task: CopyFiles@2
       displayName: 'Do Copy File'
       inputs:
@@ -47,4 +54,3 @@ stages:
        ls
   
 
-  
